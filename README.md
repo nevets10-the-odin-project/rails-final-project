@@ -1,24 +1,74 @@
-# README
+# Project: Rails Final Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
 
-Things you may want to cover:
+---
 
-* Ruby version
+## Assignment
 
-* System dependencies
+Build a social media site! You’ll build a large portion of the core user functionality of your chosen site in this project. You don’t have to worry about some of the more flashy front-end stuff unless you want to, but you don’t need it to get a nice user experience.
 
-* Configuration
+You’ll be building a clone of a social media site, such as Facebook, X, Myspace, or Threads. As with our previous lessons, how much effort you want to put into the styling and front end is up to you. The important stuff is the data and backend. You’ll put together the core features of the platform like users, profiles, posts, following, and “liking”.
 
-* Database creation
+---
 
-* Database initialization
+## DB Brainstorming
 
-* How to run the test suite
+Users
+    has many posts, inverse of: 'author'
+    has many comments
+    has many commented_posts, through comments, inverse of 'author'
+    has many likes
+    has many liked_posts, through 'likes', inverse of: 'user_likes'
+    has many followings
+    has many followers, through: 'followings', inverse of: 'followee'
+    has many followees, through: 'followings', inverse of: 'follower'
+    has many following_requests
+    has many follower_requests, through: 'following_requests', inverse of: 'follow_recipent'
+    has many followee_requests, through: 'following_requests', inverse of: 'follow_submitter'
 
-* Services (job queues, cache servers, search engines, etc.)
+    id
+    username
+    email
+    password
 
-* Deployment instructions
+Posts
+    belongs to author, class name 'User'
+    has many comments
+    has many likes
+    has many commentors, though comments
+    has many user_likes, through 'likes', inverse of: 'liked_posts'
+    
+    id
+    author_id
+    title
+    body
 
-* ...
+Comments
+    belongs to author, class name 'User'
+    belongs to post
+    
+    id
+    author_id
+    comment
+    
+following_requests
+    belongs to follow_recipent, class name 'User'
+    belongs to follow_submitter, class name 'User'
+
+    follow_recipent_id
+    follow_submitter_id
+    
+Followings
+    belongs to follower, class name 'User'
+    belongs to followee, class name 'User'
+
+    follower_id
+    followee_id
+    
+Likes
+    belongs to users
+    belongs to posts
+    
+    user_id
+    post_id
