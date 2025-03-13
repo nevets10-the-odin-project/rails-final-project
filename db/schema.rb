@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_13_013101) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_13_015034) do
   create_table "comments", force: :cascade do |t|
     t.integer "author_id"
     t.integer "post_id", null: false
@@ -37,6 +37,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_013101) do
     t.integer "author_id"
   end
 
+  create_table "user_follow_requests", force: :cascade do |t|
+    t.integer "follow_recipient_id"
+    t.integer "follow_submitter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,4 +62,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_013101) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "user_follow_requests", "users", column: "follow_recipient_id"
+  add_foreign_key "user_follow_requests", "users", column: "follow_submitter_id"
 end
