@@ -14,4 +14,7 @@ class User < ApplicationRecord
                                foreign_key: 'follow_recipient_id'
   has_many :followee_requests, through: :following_requests, inverse_of: 'follow_submitter',
                                foreign_key: 'follow_submitter_id'
+  has_many :user_follows
+  has many :followers, through: :followings, inverse_of: 'followee'
+  has many :followees, through: :followings, inverse_of: 'follower'
 end
