@@ -6,5 +6,7 @@ class User < ApplicationRecord
 
   has_many :posts, inverse_of: 'author', foreign_key: 'author_id'
   has_many :comments, inverse_of: 'author', foreign_key: 'author_id'
-  has_many :commented_posts, through: :comments
+  has_many :commented_posts, through: :comments, inverse_of: 'commenters'
+  has_many :likes
+  has_many :liked_posts, through: 'likes', inverse_of: 'user_likes'
 end
