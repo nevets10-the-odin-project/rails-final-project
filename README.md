@@ -36,7 +36,7 @@ Posts
     belongs to author, class name 'User'
     has many comments
     has many likes
-    has many commenter, though comments
+    has many commenters, though comments
     has many user_likes, through 'likes', inverse of: 'liked_posts'
     
     id
