@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = User.find(current_user.id).posts.find(params[:id])
   end
 
   # POST /posts or /posts.json
