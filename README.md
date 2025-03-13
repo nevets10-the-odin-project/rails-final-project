@@ -52,14 +52,14 @@ Comments
     author_id
     comment
     
-following_requests
-    belongs to follow_recipent, class name 'User'
+user_follow_requests
+    belongs to follow_recipient, class name 'User'
     belongs to follow_submitter, class name 'User'
 
-    follow_recipent_id
+    follow_recipient_id
     follow_submitter_id
     
-Followings
+user_follows
     belongs to follower, class name 'User'
     belongs to followee, class name 'User'
 
