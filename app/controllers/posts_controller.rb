@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @comment = User.find(current_user.id).comments.build
+    @like = User.find(current_user.id).likes.where(post_id: params[:id]).first
+    @new_like = User.find(current_user.id).likes.build unless @like
   end
 
   # GET /posts/new
@@ -18,7 +20,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = User.find(current_user.id).posts.find(params[:id])
   end
 
   # POST /posts or /posts.json

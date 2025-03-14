@@ -9,6 +9,15 @@
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
 
+<% if @like %>
+  <%= button_to "Unlike", @like, method: :delete %>
+<% else %>
+  <%= form_with model: @new_like do |f| %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit :like %>
+  <% end %>
+<% end %>
+
 <strong>Comment on post</strong>
 <%= form_with model: @comment do |f| %>
   <%= f.hidden_field :post_id, value: @post.id %>
