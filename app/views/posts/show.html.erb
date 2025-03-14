@@ -8,3 +8,18 @@
 
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
+
+<strong>Comment on post</strong>
+<%= form_with model: @comment do |f| %>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.text_area :comment, { required: true } %>
+  <br>
+  <%= f.submit %>
+<% end %>
+
+<% @post.comments.each do |comment| %>
+  <div>
+    <p>Commenter: <%= comment.author.username %></p>
+    <p><%= comment.comment %></p>
+  </div>
+<% end %>

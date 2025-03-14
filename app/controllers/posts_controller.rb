@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @comment = User.find(current_user.id).comments.build
   end
 
   # GET /posts/new
