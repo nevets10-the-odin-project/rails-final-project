@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @follower_request = @user.follower_requests.where('follow_submitter_id = ? ', current_user.id).first
+    @new_follower_request = @user.followee_requests.build unless @follower_request
   end
 
   def edit

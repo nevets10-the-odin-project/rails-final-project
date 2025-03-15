@@ -2,6 +2,20 @@
 <p><%= @user.email %></p>
 <p>User since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
 
+<% unless current_user.id == params[:id].to_i %>
+    <% if @follower_request %>
+        <%= form_with model: @follower_request, method: :delete do |f| %>
+            <%= f.hidden_field :id, value: @follower_request[:id] %>
+            <%= f.submit 'Cancel Follow Request' %>
+        <% end %>
+    <% else %>
+        <%= form_with model: @new_follower_request do |f| %>
+            <%= f.hidden_field :follow_recipient_id, value: params[:id] %>
+            <%= f.submit :follow %>
+        <% end %>
+    <% end %>
+<% end %>
+
 <h2>Posts</h2>
 <ul>
 <% @user.posts.each do |post| %>
