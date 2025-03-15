@@ -13,7 +13,6 @@ class User < ApplicationRecord
                                foreign_key: 'follow_recipient_id'
   has_many :followee_requests, class_name: 'UserFollowRequest', inverse_of: 'follow_submitter',
                                foreign_key: 'follow_submitter_id'
-  has_many :user_follows
-  has_many :followers, through: :followings, inverse_of: 'followee'
-  has_many :followees, through: :followings, inverse_of: 'follower'
+  has_many :followers, class_name: 'UserFollow', inverse_of: 'followee', foreign_key: 'followee_id'
+  has_many :followees, class_name: 'UserFollow', inverse_of: 'follower', foreign_key: 'follower_id'
 end

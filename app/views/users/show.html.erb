@@ -14,6 +14,16 @@
             <%= f.submit :follow %>
         <% end %>
     <% end %>
+<% else %>
+    <h2>Follow Requests</h2>
+    <% @new_followers.each_with_index do |new_follower, index| %>
+        <%= form_with model: new_follower do |f| %>
+            <%= f.hidden_field :follower_id %>
+            <span><%= new_follower.follower.username %></span>
+            <%= f.submit 'Accept' %>
+        <% end %>
+        <%= button_to 'Reject', @user.follower_requests[index], method: :delete %>
+    <% end %>
 <% end %>
 
 <h2>Posts</h2>

@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   def show
     @follower_request = @user.follower_requests.where('follow_submitter_id = ? ', current_user.id).first
     @new_follower_request = @user.followee_requests.build unless @follower_request
+    @new_followers = []
+    @user.follower_requests.each do |follow_request|
+      @new_followers << @user.followers.build(follower_id: follow_request[:follow_submitter_id])
+    end
   end
 
   def edit
