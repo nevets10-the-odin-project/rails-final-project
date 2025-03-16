@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<% content_for :title, @post.title %>
+
 <%= render @post %>
 
 <div><%= @post.likes.length %> Like(s)</div>
