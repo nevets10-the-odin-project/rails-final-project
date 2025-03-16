@@ -29,13 +29,13 @@
     <%= f.hidden_field :post_id, value: @post.id %>
     <%= f.text_area :comment, { required: true } %>
     <br>
-    <%= f.submit %>
+    <%= f.submit :comment, class: 'button is-link' %>
   <% end %>
 </div>
 
 <% @post.comments.each do |comment| %>
-  <div>
-    <p>Commenter: <%= comment.author.username %></p>
+  <div class="mt-4">
+    <p>Commenter: <%= link_to comment.author.username, comment.author %></p>
     <p><%= comment.comment %></p>
   </div>
 <% end %>
