@@ -26,6 +26,13 @@
     <% end %>
 <% end %>
 
+<h2>Followers</h2>
+<ul>
+<% @user.followers.each do |follower| %>
+    <li><%= link_to follower.follower.username, follower.follower %></li>
+<% end %>
+</ul>
+
 <h2>Posts</h2>
 <ul>
 <% @user.posts.each do |post| %>
