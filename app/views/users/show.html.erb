@@ -33,6 +33,13 @@
 <% end %>
 </ul>
 
+<h2>Followed Users</h2>
+<ul>
+<% @user.followees.each do |followee| %>
+    <li><%= link_to followee.followee.username, followee.followee %></li>
+<% end %>
+</ul>
+
 <h2>Posts</h2>
 <ul>
 <% @user.posts.each do |post| %>
