@@ -1,69 +1,84 @@
 <% content_for :title, @user.username %>
 
-<h1 class="is-size-4"><%= @user.username %></h1>
-<p><%= @user.email %></p>
-<p>User since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+<div class="mb-4">
+    <h1 class="is-size-3"><%= @user.username %></h1>
+    <p><%= @user.email %></p>
+    <p>User since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+</div>
 
-<% unless current_user.id == params[:id].to_i %>
-    <% if @follower_request %>
-        <%= form_with model: @follower_request, method: :delete do |f| %>
-            <%= f.hidden_field :id, value: @follower_request[:id] %>
-            <%= f.submit 'Cancel Follow Request' %>
+<div class="is-flex flex-gap-4">
+    <div class="is-flex-grow-1">
+        <h2 class="is-size-4">Followers</h2>
+        <ul>
+        <% @user.followers.each do |follower| %>
+            <li><%= link_to follower.follower.username, follower.follower %></li>
         <% end %>
-    <% else %>
-        <%= form_with model: @new_follower_request do |f| %>
-            <%= f.hidden_field :follow_recipient_id, value: params[:id] %>
-            <%= f.submit :follow %>
+        </ul>
+
+        <h2 class="is-size-4">Followed Users</h2>
+        <ul>
+        <% @user.followees.each do |followee| %>
+            <li><%= link_to followee.followee.username, followee.followee %></li>
         <% end %>
-    <% end %>
-<% else %>
-    <h2>Follow Requests</h2>
-    <% @new_followers.each_with_index do |new_follower, index| %>
-        <%= form_with model: new_follower do |f| %>
-            <%= f.hidden_field :follower_id %>
-            <span><%= new_follower.follower.username %></span>
-            <%= f.submit 'Accept' %>
+        </ul>
+
+        <% unless current_user.id == params[:id].to_i %>
+            <div class="mt-4">
+                <% if @follower_request %>
+                    <%= form_with model: @follower_request, method: :delete do |f| %>
+                        <%= f.hidden_field :id, value: @follower_request[:id] %>
+                        <%= f.submit 'Cancel Follow Request', class: 'button is-link' %>
+                    <% end %>
+                <% else %>
+                    <%= form_with model: @new_follower_request do |f| %>
+                        <%= f.hidden_field :follow_recipient_id, value: params[:id] %>
+                        <%= f.submit :follow, class: 'button is-link' %>
+                    <% end %>
+                <% end %>
+            </div>
+        <% else %>
+            <h2 class="is-size-4">Follow Requests</h2>
+            <% @new_followers.each_with_index do |new_follower, index| %>
+                <div class="is-flex flex-gap-2 is-align-items-center">
+                    <%= form_with model: new_follower, class: 'is-flex flex-gap-2 is-align-items-center' do |f| %>
+                        <%= f.hidden_field :follower_id %>
+                        <span><%= new_follower.follower.username %></span>
+                        <%= f.submit 'Accept', class: 'button is-link' %>
+                    <% end %>
+                    <%= button_to 'Reject', @user.follower_requests[index], method: :delete, class: 'button is-link' %>
+                </div>
+            <% end %>
         <% end %>
-        <%= button_to 'Reject', @user.follower_requests[index], method: :delete %>
-    <% end %>
-<% end %>
+    </div>
 
-<h2>Followers</h2>
-<ul>
-<% @user.followers.each do |follower| %>
-    <li><%= link_to follower.follower.username, follower.follower %></li>
-<% end %>
-</ul>
+    <div class="is-flex-grow-1">
+        <h2 class="is-size-4">Posts</h2>
+        <ul>
+        <% @user.posts.each do |post| %>
+            <li><%= link_to post.title, post %></li>
+        <% end %>
+        </ul>
 
-<h2>Followed Users</h2>
-<ul>
-<% @user.followees.each do |followee| %>
-    <li><%= link_to followee.followee.username, followee.followee %></li>
-<% end %>
-</ul>
 
-<h2>Posts</h2>
-<ul>
-<% @user.posts.each do |post| %>
-    <li><%= link_to post.title, post %></li>
-<% end %>
-</ul>
+        <h2 class="is-size-4">Liked Posts</h2>
+        <ul>
+        <% @user.likes.each do |like| %>
+            <li>
+                <%= link_to like.post.title, like.post %>
+            </li>
+        <% end %>
+        </ul>
+    </div>
 
-<h2>Comments</h2>
-<ul>
-<% @user.comments.each do |comment| %>
-    <li>
-        <%= link_to comment.post.title, comment.post %> - 
-        <%= comment.comment%>
-    </li>
-<% end %>
-</ul>
-
-<h2>Liked Posts</h2>
-<ul>
-<% @user.likes.each do |like| %>
-    <li>
-        <%= link_to like.post.title, like.post %>
-    </li>
-<% end %>
-</ul>
+    <div class="is-flex-grow-1">
+        <h2 class="is-size-4">Comments</h2>
+        <ul>
+        <% @user.comments.each do |comment| %>
+            <li>
+                <%= link_to comment.post.title, comment.post %> - 
+                <%= comment.comment%>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+</div>
