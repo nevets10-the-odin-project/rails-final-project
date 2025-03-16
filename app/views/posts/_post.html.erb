@@ -1,13 +1,7 @@
 <div id="<%= dom_id post %>">
-  <h1 class="is-size-4"><%= post.title %></h1>
-  <p>
-    <i>Author:</i>
-    <%= post.author.username %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= post.body %>
-  </p>
-
+  <div class="is-flex is-align-items-baseline">
+  <h1 class="is-size-3 has-text-weight-bold mr-1"><%= post.title %></h1>
+  <p class="is-size-4">- <i><%= link_to post.author.username, post.author %></i></p>
+  </div>
+  <p><%= post.body %></p>
 </div>
