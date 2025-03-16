@@ -6,7 +6,7 @@
 
 <%= link_to "New post", new_post_path %>
 
-<div id="posts">
+<div id="posts" class="mt-4">
   <% @posts.each do |post| %>
     <p>
       <span class="is-size-5"><%= link_to post.title, post %></span>
