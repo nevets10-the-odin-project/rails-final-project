@@ -26,6 +26,7 @@ At the end of the day, the basics that were taught in the course were implemente
 
 ## DB Brainstorming
 
+```
 Users
     has many posts, inverse of: 'author'
     has many comments
@@ -43,6 +44,7 @@ Users
     username
     email
     password
+
 
 Posts
     belongs to author, class name 'User'
@@ -84,3 +86,4 @@ Likes
     
     user_id
     post_id# rails-final-project
+```
