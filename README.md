@@ -12,6 +12,18 @@ You’ll be building a clone of a social media site, such as Facebook, X, Myspac
 
 ---
 
+## Post-project review
+
+The hardest part of this project was getting the association between users following each other. I eventually got an association established, but it seems to not be the ideal way of implementing it. I also tried using Bulma for the first time, which was interesting...
+
+I didn't implement everything that was listed in the project description; specifically welcome emails and profile pictures, although I partially implemented the welcome emails. There's no instructions for setting up the emails with devise in TOP's course, the rails guides, devise's github docs or letter opener's github docs. I found a walkthrough after some searching, but it was for Rails 7 and didn't seem to work, which might be because I'm on 8.
+
+For the profile pictures, the project page recommends Gravatar, which really doesn't look appealing. My goal isn't to force users to sign up for unrelated services. I also looked at Omniauth, but that would require actually deploying the website.
+
+At the end of the day, the basics that were taught in the course were implemented. Everything else just seemed like they asked for something and said "Just figure it out".
+
+---
+
 ## DB Brainstorming
 
 Users
@@ -71,4 +83,4 @@ Likes
     belongs to posts
     
     user_id
-    post_id
+    post_id# rails-final-project
